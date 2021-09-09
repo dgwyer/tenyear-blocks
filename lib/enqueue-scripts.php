@@ -19,6 +19,16 @@ function enqueue_block_editor_assets() {
 		filemtime( _get_plugin_directory() . $block_path )
 	);
 
+  $js_data = array(
+		'image_url' => _get_plugin_url() . '/assets/images/tenyear-phone-illustration.png',
+	);
+
+	wp_add_inline_script(
+		'jsforwp-blocks-js',
+		'var jsData = ' . wp_json_encode( $js_data ),
+		'before'
+	);
+
 	// wp_localize_script(
 	// 	'jsforwp-blocks-js',
 	// 	'js_data',
@@ -69,13 +79,13 @@ function enqueue_frontend_assets() {
 		filemtime( _get_plugin_directory() . $block_path )
 	);
 
-	$js_data = array(
-		'image_url' => _get_plugin_url() . '/assets/images/tenyear-phone-illustration.png',
-	);
+	// $js_data = array(
+	// 	'image_url' => _get_plugin_url() . '/assets/images/tenyear-phone-illustration.png',
+	// );
 
-	wp_add_inline_script(
-		'jsforwp-blocks-frontend',
-		'var jsData = ' . wp_json_encode( $js_data ),
-		'before'
-	);
+	// wp_add_inline_script(
+	// 	'jsforwp-blocks-frontend',
+	// 	'var jsData = ' . wp_json_encode( $js_data ),
+	// 	'before'
+	// );
 }
