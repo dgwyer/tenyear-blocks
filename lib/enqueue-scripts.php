@@ -11,7 +11,7 @@ function enqueue_block_editor_assets() {
 	$block_path = '/assets/js/editor.blocks.js';
 	$style_path = '/assets/css/blocks.editor.css';
 
-	// Enqueue the bundled block JS file
+	// Enqueue the bundled block JS file.
 	wp_enqueue_script(
 		'jsforwp-blocks-js',
 		_get_plugin_url() . $block_path,
@@ -19,11 +19,19 @@ function enqueue_block_editor_assets() {
 		filemtime( _get_plugin_directory() . $block_path )
 	);
 
-	// Enqueue optional editor only styles
+	// wp_localize_script(
+	// 	'jsforwp-blocks-js',
+	// 	'js_data',
+	// 	array(
+	// 		'my_image_url' => ( _get_plugin_url() . '/assets/images/BACK.png' ),
+	// 	)
+	// );
+
+	// Enqueue optional editor only styles.
 	wp_enqueue_style(
 		'jsforwp-blocks-editor-css',
 		_get_plugin_url() . $style_path,
-		[ ],
+		[],
 		filemtime( _get_plugin_directory() . $style_path )
 	);
 }
@@ -59,5 +67,15 @@ function enqueue_frontend_assets() {
 		_get_plugin_url() . $block_path,
 		[],
 		filemtime( _get_plugin_directory() . $block_path )
+	);
+
+	$js_data = array(
+		'image_url' => _get_plugin_url() . '/assets/images/tenyear-phone-illustration.png',
+	);
+
+	wp_add_inline_script(
+		'jsforwp-blocks-frontend',
+		'var jsData = ' . wp_json_encode( $js_data ),
+		'before'
 	);
 }
